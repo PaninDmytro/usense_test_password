@@ -1,0 +1,17 @@
+<main class="main">
+  <div>
+    <input type="password" [(ngModel)]="password" (input)="checkPasswordStrength()" placeholder="Enter password" class="password">
+  </div>
+
+  <div id="strengthSections">
+    <div class="section"
+      [ngClass]="{'red': passwordStrength === 'weak' || passwordStrength === 'easy', 'gray': passwordStrength === 'empty', 'yellow': passwordStrength === 'medium', 'green': passwordStrength === 'strong'}">
+    </div>
+    <div class="section"
+      [ngClass]="{'red': passwordStrength === 'weak', 'gray': passwordStrength === 'empty' || passwordStrength === 'easy', 'yellow': passwordStrength === 'medium', 'green': passwordStrength === 'strong'}">
+    </div>
+    <div class="section"
+      [ngClass]="{'red': passwordStrength === 'weak', 'green': passwordStrength === 'strong', 'gray': passwordStrength === 'empty' || passwordStrength === 'easy' || passwordStrength === 'medium'}">
+    </div>
+  </div>
+</main>

@@ -1,0 +1,39 @@
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.password {
+  width: 200px;
+  height: 25px;
+}
+
+.section {
+  width: 50px;
+  height: 5px;
+  margin-right: 20px;
+  display: inline-block;
+  border-radius: 15px;
+
+  &:last-of-type {
+    margin-right: 0;
+  }
+}
+
+.red {
+  background-color: red;
+}
+
+.yellow {
+  background-color: yellow;
+}
+
+.green {
+  background-color: green;
+}
+
+.gray {
+  background-color: gray;
+}
