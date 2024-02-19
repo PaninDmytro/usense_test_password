@@ -98,7 +98,7 @@
         "deploy": {
           "builder": "angular-cli-ghpages:deploy",
           "options": {
-            "baseHref": "https://panindmytro.github.io/usense_password_test/",
+            "baseHref": "https://panindmytro.github.io/usense_test_password/",
             "name": "Panin Dmytro",
             "email": "dmitriyp1598@gmail.com"
           }

@@ -1,38 +1,31 @@
-import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { RouterOutlet } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { InputComponent } from './components/input/input.component';
+import { StrengthSectionsComponent } from './components/strength-sections/strength-sections.component';
+import { PasswordStrengthService } from '../services/password-strength.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FormsModule, CommonModule],
+  imports: [InputComponent, StrengthSectionsComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent {
-  title = 'password-test';
-
-  ngOnInit(): void {
-    this.password = '';
-
-    this.checkPasswordStrength();
-  }
-
-  password: string = '';
+export class AppComponent implements OnInit {
+  passwordControl = new FormControl('');
   passwordStrength: string = '';
 
+  constructor(private passwordStrengthService: PasswordStrengthService) {}
+
+  ngOnInit(): void {
+    this.passwordControl.valueChanges.subscribe(() => {
+      this.checkPasswordStrength();
+    });
+  }
+
   checkPasswordStrength(): void {
-    if (!this.password) {
-      this.passwordStrength = 'empty';
-    } else if (this.password.length < 8) {
-      this.passwordStrength = 'weak';
-    } else if (/^[a-zA-Z]+$/.test(this.password) || /^[0-9]+$/.test(this.password) || /^\W+$/.test(this.password)) {
-      this.passwordStrength = 'easy';
-    } else if (/^(?=.*[a-zA-Z])(?=.*\d)(?=.*\W).+$/.test(this.password)) {
-      this.passwordStrength = 'strong';
-    } else {
-      this.passwordStrength = 'medium';
+    if (this.passwordControl.value !== null) {
+      this.passwordStrength = this.passwordStrengthService.checkPasswordStrength(this.passwordControl.value);
     }
   }
 }
